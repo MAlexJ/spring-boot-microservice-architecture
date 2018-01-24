@@ -18,32 +18,36 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.malex"})
-public class WebMvcConfig implements WebMvcConfigurer, ApplicationContextAware {
-
+public class WebMvcConfig implements WebMvcConfigurer, ApplicationContextAware
+{
     private static final String UTF8 = "UTF-8";
 
     private ApplicationContext applicationContext;
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    public void setApplicationContext(ApplicationContext applicationContext)
+    {
         this.applicationContext = applicationContext;
     }
 
     @Bean
-    public ViewResolver viewResolver() {
+    public ViewResolver viewResolver()
+    {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding(UTF8);
         return resolver;
     }
 
-    private TemplateEngine templateEngine() {
+    private TemplateEngine templateEngine()
+    {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(templateResolver());
         return engine;
     }
 
-    private ITemplateResolver templateResolver() {
+    private ITemplateResolver templateResolver()
+    {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setApplicationContext(applicationContext);
         resolver.setPrefix("/WEB-INF/templates/");

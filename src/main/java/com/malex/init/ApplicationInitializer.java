@@ -4,6 +4,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.MultipartConfigElement;
@@ -13,8 +14,8 @@ import javax.servlet.ServletRegistration;
 /**
  *
  */
-public class ApplicationInitializer implements WebApplicationInitializer {
-
+public class ApplicationInitializer implements WebApplicationInitializer
+{
     /**
      * Path to
      */
@@ -42,13 +43,18 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     private final static int FILE_SIZE_THRESHOLD = 0;
 
     @Override
-    public void onStartup(ServletContext servletContext) {
+    public void onStartup(ServletContext servletContext)
+    {
 
         // Create the 'root' Spring application context
         WebApplicationContext context = getContext();
 
         // Manage the lifecycle of the root application context
         servletContext.addListener(new ContextLoaderListener(context));
+
+        // Security config
+        servletContext.addFilter(FILTER_NAME, new DelegatingFilterProxy(TARGET_BEAN_NAME))
+                .addMappingForUrlPatterns(null, false, URL_PATTERNS);
 
         // Create the dispatcher servlet's Spring application context
         ServletRegistration.Dynamic dispatcher = servletContext
@@ -61,7 +67,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     /**
      * Create the 'root' Spring application context and add config class
      */
-    private AnnotationConfigWebApplicationContext getContext() {
+    private AnnotationConfigWebApplicationContext getContext()
+    {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         // path to config classes
         context.setConfigLocation(CONFIG_LOCATION);
@@ -71,7 +78,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     /**
      *
      */
-    private MultipartConfigElement getMultiPartConfigElement() {
+    private MultipartConfigElement getMultiPartConfigElement()
+    {
         return new MultipartConfigElement(LOCATION,
                 MAX_FILE_SIZE,
                 MAX_REQUEST_SIZE,
