@@ -8,9 +8,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
+ * Creating The Security Configuration
+ * <p>
  * Spring Security configuration
  * https://www.boraji.com/spring-mvc-5-spring-security-5-hibernate-5-example
  * https://justinrodenbostel.com/2014/05/30/part-5-integrating-spring-security-with-spring-boot-web/
@@ -19,10 +20,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-
-    /**
-     *
-     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder()
     {
@@ -30,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     /**
-     *
+     * Configure user data
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
@@ -44,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     /**
-     *
+     * Configure asses to wer resources
      */
     @Override
     public void configure(WebSecurity web) throws Exception
@@ -62,12 +59,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .authorizeRequests().anyRequest().authenticated();
         http
                 .formLogin().failureUrl("/login?error")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/*")
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-                .permitAll();
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+                .permitAll()
+                .and()
+                .csrf().ignoringAntMatchers("/login", "/logout");
     }
-
 }

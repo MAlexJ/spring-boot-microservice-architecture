@@ -4,20 +4,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Registering the Login Action
- */
 @Controller
-public class LoginController
+public class HomeController
 {
     /**
-     * User authorization page
+     * Home page
      *
-     * @return `login` page
+     * @return `index` page
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage()
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String homePage()
     {
-        return "login.html";
+        return "index.html";
     }
 }
