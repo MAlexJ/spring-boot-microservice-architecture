@@ -1,22 +1,74 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label> User Name : <br/> <input type="text" name="username"/></label>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <form th:action="@{/login}" method="post" class="form-signin" style="padding-top: 120px;">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <br>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Username" required=""
+                       name="username" autofocus="">
+                <br>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""
+                       name="password">
+                <div class="checkbox" style="padding-bottom: 10px;padding-top: 20px;">
+                    <label>
+                        <input type="checkbox" value="remember-me" id="remember_me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
     </div>
-    <br/>
-    <div>
-        <label> Password: <br/> <input type="password" name="password"/></label>
-    </div>
-    <br/>
-    <div>
-        <input type="submit" value="Sign In"/>
-    </div>
-</form>
+</div>
+<script>
+    // remember me
+    $(function () {
+        if (localStorage.chkbx && localStorage.chkbx !== '') {
+            $('#remember_me').attr('checked', 'checked');
+            $('#inputEmail').val(localStorage.usrname);
+            $('#inputPassword').val(localStorage.pass);
+        } else {
+            $('#remember_me').removeAttr('checked');
+            $('#inputEmail').val('');
+            $('#inputPassword').val('');
+        }
+        $('#remember_me').click(function () {
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.usrname = $('#inputEmail').val();
+                localStorage.pass = $('#inputPassword').val();
+                localStorage.chkbx = $('#remember_me').val();
+            } else {
+                localStorage.usrname = '';
+                localStorage.pass = '';
+                localStorage.chkbx = '';
+            }
+        });
+    });
+</script>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
 </body>
 </html>
