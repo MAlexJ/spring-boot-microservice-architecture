@@ -1,0 +1,120 @@
+{
+	"id": "95214ded-6f7e-5e05-400e-b93366ef7128",
+	"name": "TestServerApi",
+	"description": "",
+	"order": [
+		"ef6a9544-6229-0668-ed29-af7de9b6a2c1",
+		"b413ac0a-df10-e6e0-b8a9-e146e4ed19ba",
+		"fe56e74b-723e-a663-5231-e1d5b89b7f44",
+		"c1e5b19f-5d2f-0673-1c6a-cf62abad3801"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1638996448799,
+	"owner": "1029946",
+	"public": false,
+	"requests": [
+		{
+			"id": "b413ac0a-df10-e6e0-b8a9-e146e4ed19ba",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/books",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "95214ded-6f7e-5e05-400e-b93366ef7128",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get All books",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1638996568096,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "c1e5b19f-5d2f-0673-1c6a-cf62abad3801",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/books?author=Bloch",
+			"queryParams": [
+				{
+					"key": "author",
+					"value": "Bloch",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1639004737405,
+			"name": "Search by author name",
+			"description": "",
+			"collectionId": "95214ded-6f7e-5e05-400e-b93366ef7128",
+			"responses": []
+		},
+		{
+			"id": "ef6a9544-6229-0668-ed29-af7de9b6a2c1",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/books",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1639004740300,
+			"name": "Add new book",
+			"description": "",
+			"collectionId": "95214ded-6f7e-5e05-400e-b93366ef7128",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"author\" : \"Joshua Bloch2\",\r\n    \"title\" : \"Effective Java2\",\r\n    \"price\" : 54.99  \r\n}"
+		},
+		{
+			"id": "fe56e74b-723e-a663-5231-e1d5b89b7f44",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/books/6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1639004735980,
+			"name": "Get book by Id",
+			"description": "",
+			"collectionId": "95214ded-6f7e-5e05-400e-b93366ef7128",
+			"responses": []
+		}
+	]
+}
