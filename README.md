@@ -2,10 +2,10 @@
 
 ### Project information
 
-microservice part-1: https://tproger.ru/articles/pishem-java-veb-prilozhenie-na-sovremennom-steke-s-nulja-do-mikroservisnoj-arhitektury-chast-1
-microservice part-2: https://tproger.ru/articles/pishem-java-veb-prilozhenie-na-sovremennom-steke-s-nulja-do-mikroservisnoj-arhitektury-chast-2/
+microservice part-1: https://tproger.ru/articles/pishem-java-veb-prilozhenie-na-sovremennom-steke-s-nulja-do-mikroservisnoj-arhitektury-chast-1/ <br>
+microservice part-2: https://tproger.ru/articles/pishem-java-veb-prilozhenie-na-sovremennom-steke-s-nulja-do-mikroservisnoj-arhitektury-chast-2/ <br>
 
-mapstruct: https://www.baeldung.com/mapstruct
+mapstruct: https://www.baeldung.com/mapstruct <br>
 
 ### Reference Documentation
 For further reference, please consider the following sections:
