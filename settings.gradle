@@ -1,1 +1,4 @@
-rootProject.name = 'spring-boot-microservice-architecture'
+rootProject.name = 'spring-boot-microservice-arcgitecture'
+include 'rest-service'
+include 'auth-service'
+
