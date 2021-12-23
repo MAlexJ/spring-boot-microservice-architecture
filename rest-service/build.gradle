@@ -4,8 +4,8 @@ plugins {
     id 'java'
 }
 
-group = 'com.malex'
-version = '0.0.1-SNAPSHOT'
+group 'org.spring.microcervice'
+version '0.0.1-SNAPSHOT'
 
 configurations {
     compileOnly {
