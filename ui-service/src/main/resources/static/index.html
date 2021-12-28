@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <meta name="locale" content="ua_UA">
+    <meta name="robots" content="noindex, follow">
+
+    <title>Результати аналізів — медична лабораторія ОН Лаб</title>
+
+    <!--  script  -->
+    <script src="js/scripts/crypto-js.js"></script>
+    <script type="application/json" src="js/data.json"></script>
+    <script type="text/javascript">
+        var encryptedAES = CryptoJS.AES.encrypt("Message", "SecretPassphrase");
+        var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "SecretPassphrase");
+        // get full URL and parse pat params: http://site.com?certId=1&secret=SecretPassphrase
+        var url = new URL(window.location.href);
+        var certId = url.searchParams.get("certId");
+        var secret = url.searchParams.get("secret");
+        // update inner HTML
+        window.onload = function () {
+            initJsonData();
+
+            function initJsonData() {
+                document.getElementById("certId").value = certId;
+                fetch("./js/data.json").then(response => response.json()).then(json => {
+                    json.forEach(function (dataJson) {
+                        if (dataJson[Object.keys(dataJson)[0]] == certId) {
+                            var pdfData = dataJson[Object.keys(dataJson)[1]];
+                            if (pdfData.length > 100) {
+                                document.getElementById('pdfIframe').src = "data:application/pdf;base64," + pdfData;
+                                document.getElementById('pdfIframe').style.display = 'flex';
+                            }
+                        }
+                    })
+                })
+            }
+        }
+    </script>
+
+    <!--  link  -->
+    <link rel="shortcut icon" href="./img/favicon.png">
+    <link rel="preload" href="css/placeholders.css" as="style">
+    <link rel="stylesheet" href="css/placeholders.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet preload" as="style"
+          href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto:400,500&amp;subset=cyrillic,cyrillic-ext,latin-ext&amp;display=swap">
+</head>
+<body id="layout" class="relative grid">
+<header
+        class="grid bg-main-blue px-3/4 tablet:px-1 text-white z-20 sticky border-b-1 border-dark-blue box-border text-center px-1 desktop:px-1">
+    <div class="flex items-center">
+        <div class="logo-container">
+            <a href="https://onclinic.ua/">
+                <img width="1" height="1" src="img/logo-mobile.svg">
+            </a>
+        </div>
+        <div class="selected-clinic flex items-center flex-wrap hidden tablet:flex" style="padding-left: 20px;">
+            <a href="https://onclinic.ua/" class="font-neosans text-white text-14 leading-1">
+                Медичний центр ОН Клінік
+            </a>
+        </div>
+    </div>
+    <div class="links flex align-items-center justify-end desktop:-mx-1/4 ">
+        <a href="https://onclinic.ua/news/akcija-na-privivki-ot-grippa"
+           class="items-center border-2 rounded-3 border-olive mx-1/4 px-1/2 desktop:px-1 py-1/4 tablet:py-0 text-3/4 tablet:text-14 tablet:leading-2 leading-1 font-normal tablet:font-medium font-neosans text-white hover:underline">
+            Вакцинація
+        </a>
+    </div>
+</header>
+<main class="bg-white relative" id="page">
+    <div class="content min-h-screen">
+        <nav class="breadcrumbs h-auto pt-1 pb-0">
+            <ol class="list-reset flex flex-wrap pl-0 mb-0 mt-0">
+                <li class="active list-none mt-0">
+                    <a href="https://onclinic.ua/"
+                       class="hover:underline text-3/4 focus:underline text-main-blue font-roboto" aria-label="Головна">
+                        Головна
+                    </a>
+                </li>
+                <li class="list-none mt-0"><span class="mx-1/4 font-roboto text-3/4 text-main-blue">/</span></li>
+                <li class="list-none mt-0">
+                    <span class="text-gray-700 font-roboto text-3/4 hover:no-underline focus:no-underline"
+                          aria-label="Перевірити результати аналізів">
+                    Перевірити результати аналізів
+                    </span>
+                </li>
+            </ol>
+        </nav>
+        <h1>Перевірити результати аналізів</h1>
+        <div class="mb-4 grid grid-cols-4" style="margin-bottom: 0px">
+            <div class="col-start-1 col-end-5 desktop:col-start-1 desktop:col-end-4">
+                <p>Для перегляду та скачування результату аналізу, введіть індивідуальний код, розташований у верхньому
+                    правому куті бланка.</p>
+                <p>Код містить цифри і букви латинського алфавіту.</p>
+                <div class=" mb-1 grid grid-cols-4">
+                    <div class="col-start-1 col-end-5  desktop:col-end-3">
+                        <div class="form-verification">
+                            <form accept-charset="UTF-8">
+                                <div class="form-group">
+                                    <input id="certId" class="form-control-forms" placeholder="Код" required=""
+                                           name="certId" type="text" value="">
+                                </div>
+                                <input class="button olive mr-1/2 mb-1/2" type="submit" value="Отримати">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <iframe id="pdfIframe"
+                style="display: none; width: 100%; height: 800px; padding-bottom: 30px;">
+        </iframe>
+    </div>
+    <div class="bg-gray-100 pt-1 relative tablet:sticky pb-1/2 z-20 form-bottom-sticky">
+        <div class="content">
+            <div class="tablet:flex">
+                <div class="flex flex-col justify-center tablet:justify-start tablet:flex-row tablet:items-center flex-wrap items-center ">
+                    <button class="button cart-button olive mr-1/2 mb-1/2">Записатись на прийом</button>
+                    <button class="button olive-outline mb-1/2 mr-1/2">Поставити питання</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="bg-main-blue z-10 desktop:pb-2 pb-1">
+    <div class="content">
+        <div class="footer-top-links grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 py-1">
+            <div>
+                <ul class="m-0 p-0">
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/insurance-partner-companies"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Страхові партнери
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/partial-payment.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Оплата частинами
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/onlab.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Про лабораторію «ОН Клінік»
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/discounts.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Знижки на лікування в «ОН Клінік»
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/advertising-campaign.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Умови акції
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/companies"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Наші партнери
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="m-0 p-0">
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/rekvisity.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Реквізити для оплати
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/online-oplata.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Оплата онлайн
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://onclinic.ua/privacy-policy.html"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Умови конфіденційності
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://plastic-surgery.onclinic.ua/" target="_blank" aria-label="Пластична хірургія"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Пластична хірургія
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://syirbu.onclinic.ua/" target="_blank" aria-label="Дитячий лікар"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            Дитячий лікар
+                        </a>
+                    </li>
+                    <li class="list-none list-none mt-0">
+                        <a href="https://medcentercrm.com/ua/" target="_blank" aria-label="Медична інформаційна система"
+                           class="text-3/4 leading-2 text-white no-underline hover:underline focus:underline">
+                            МІС
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-2 tablet:mt-0 rounded-8 border-light-blue border-1 p-1 tablet:col-end-5 h-fit-content">
+                <div class="grid grid-cols-4 tablet:grid-cols-2 grid-rows-1 tablet:grid-rows-2 gap-1 type-payment">
+                    <img width="51" height="33" src="img/f-icon-apple-pay.svg"
+                         class="my-auto tablet:mx-0 w-auto" alt="apple-pay">
+                    <img width="56" height="40" src="img/f-icon-master.svg" alt="mastercard"
+                         class="my-auto mx-auto tablet:ml-auto  tablet:mx-0 w-auto">
+                    <img width="49" height="31" src="img/f-icon-google-pay.svg" alt="google-pay"
+                         class="my-auto mx-auto tablet:mt-auto tablet:ml-0 tablet:mr-auto w-auto">
+                    <img width="65" height="21" src="img/f-icon-visa.svg" alt="visa"
+                         class="my-auto mx-auto tablet:mt-auto  tablet:ml-auto tablet:mx-0 w-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-footer pt-1-1/2">
+        <div class="content">
+            <div class="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4  gap-1">
+                <div class="text-light-blue text-3/4 leading-1-1/2">
+                    Самолікування може бути небезпечним для вашого здоров'я.
+                </div>
+                <div class="text-light-blue text-3/4 leading-1-1/2">
+                    On Clinic Advanced Medical Institute,
+                    <br>LTD. 2007-2021 © All Rights Reserved.
+                </div>
+                <div class="relative">
+                    <img src="img/logo-light-blue.svg"
+                         class="logo block m-0 desktop:ml-auto object-cover" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
