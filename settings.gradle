@@ -3,4 +3,5 @@ include 'rest-service'
 include 'auth-service'
 include 'qr-code-service'
 include 'ui-service'
+include 'aes_encrypt_service'
 
