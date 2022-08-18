@@ -42,7 +42,11 @@ public class QRCodeController {
      * @return test html page
      */
     @GetMapping("/test")
-    public String generateQRCode(Model model, @PathVariable(required = false) String content, @PathVariable(required = false) String format, @PathVariable(required = false) Integer width, @PathVariable(required = false) Integer height) {
+    public String generateQRCode(Model model, //
+                                 @PathVariable(required = false) String content, //
+                                 @PathVariable(required = false) String format, //
+                                 @PathVariable(required = false) Integer width, //
+                                 @PathVariable(required = false) Integer height) {
         QRCodeContext ctx = initContext(content, format, width, height);
         String qrcode = getImageInBase64Format(ctx);
         model.addAttribute(CONTENTS_ATTRIBUTE_NAME, ctx.content());
