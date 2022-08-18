@@ -12,8 +12,8 @@
     <script src="js/scripts/crypto-js.js"></script>
     <script type="application/json" src="js/data.json"></script>
     <script type="text/javascript">
-        var encryptedAES = CryptoJS.AES.encrypt("Message", "Erf4yhThu3okhUy8");
-        var decryptedBytes = CryptoJS.AES.decrypt("U2FsdGVkX199lYatnlXl7PZcdWNjOj6E49SJgI0Q3Ixqjsm3ow3HiTt4vgoOngaf", "Erf4yhThu3okhUy8");
+        var encryptedAES = CryptoJS.AES.encrypt("Message", "SecretPassphrase");
+        var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "SecretPassphrase");
         // get full URL and parse pat params: http://site.com?certId=1&secret=SecretPassphrase
         var url = new URL(window.location.href);
         var certId = url.searchParams.get("certId");
@@ -21,20 +21,8 @@
         // update inner HTML
         window.onload = function () {
             initJsonData();
+
             function initJsonData() {
-
-                if(secret){
-                   document.getElementById("secret").innerHTML = secret;
-                }
-
-                if(encryptedAES){
-                   document.getElementById("encryptedData").innerHTML = encryptedAES;
-                }
-
-<!--                if(decryptedBytes){-->
-                   document.getElementById("decryptedData").innerHTML = decryptedBytes.toString(CryptoJS.enc.Utf8);
-<!--                }-->
-
                 document.getElementById("certId").value = certId;
                 fetch("./js/data.json").then(response => response.json()).then(json => {
                     json.forEach(function (dataJson) {
@@ -49,8 +37,6 @@
                 })
             }
         }
-
-
     </script>
 
     <!--  link  -->
@@ -123,25 +109,13 @@
                 </div>
             </div>
         </div>
-        <br>
-        <div>Secred:<b>
-            <div id="secret"></div>
-        </b>
+        <div class="mb-4 grid grid-cols-4">
+            <div class="col-start-1 col-end-5 desktop:col-start-1 desktop:col-end-8">
+                <iframe id="pdfIframe"
+                        style="display: none; width: 100%; height: 800px; padding-bottom: 30px;">
+                </iframe>
+            </div>
         </div>
-        <br>
-        <div>Encrypted data:<b>
-            <div id="encryptedData"></div>
-        </b>
-        </div>
-        <br>
-        <div>Decrypted data:<b>
-            <div id="decryptedData"></div>
-        </b>
-        </div>
-        <br>
-        <iframe id="pdfIframe"
-                style="display: none; width: 100%; height: 800px; padding-bottom: 30px;">
-        </iframe>
     </div>
     <div class="bg-gray-100 pt-1 relative tablet:sticky pb-1/2 z-20 form-bottom-sticky">
         <div class="content">

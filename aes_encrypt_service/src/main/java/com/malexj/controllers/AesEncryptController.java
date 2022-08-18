@@ -16,7 +16,7 @@ public class AesEncryptController {
 
     private final AesEncryptService service;
 
-    @GetMapping
+    @PostMapping
     public String encrypt(@RequestBody AesRequest request) {
         return service.encrypt(request);
     }

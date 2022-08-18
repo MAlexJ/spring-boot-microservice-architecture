@@ -1,13 +1,13 @@
-package com.malex;
+package com.malexj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebappApplication {
+public class AesEncryptWebappApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebappApplication.class, args);
+        SpringApplication.run(AesEncryptWebappApplication.class, args);
     }
 
 }
