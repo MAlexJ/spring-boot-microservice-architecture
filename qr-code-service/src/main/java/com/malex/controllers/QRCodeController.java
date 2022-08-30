@@ -1,7 +1,7 @@
 package com.malex.controllers;
 
 import com.malex.model.QRCodeContext;
-import com.malex.services.QRCodeGeneratorImpl;
+import com.malex.services.impl.QRCodeGeneratorImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

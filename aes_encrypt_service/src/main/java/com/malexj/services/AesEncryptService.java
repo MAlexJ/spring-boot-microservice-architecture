@@ -1,8 +1,14 @@
 package com.malexj.services;
 
 import com.malexj.models.AesRequest;
+import com.malexj.models.AesResponse;
 
 public interface AesEncryptService {
 
-    String encrypt(AesRequest reques);
+    @Deprecated
+    String encrypt(AesRequest request);
+
+    AesResponse encrypt(String stringToEncode);
+
+    String decrypt(String encodedString, String key);
 }
